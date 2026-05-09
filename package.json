@@ -1,0 +1,36 @@
+{
+  "name": "openai-realtime-voice-lab",
+  "version": "0.1.0",
+  "description": "Mobile-first demo for OpenAI realtime voice, translation, and transcription models.",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericqian77/openai-realtime-voice-lab.git"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@openai/agents": "^0.11.0",
+    "express": "^5.2.1",
+    "hono": "^4.11.4",
+    "lucide-react": "^1.14.0",
+    "next": "16.2.6",
+    "openai": "^6.37.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.6",
+    "typescript": "^5"
+  }
+}
