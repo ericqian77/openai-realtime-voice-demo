@@ -1,26 +1,47 @@
-# OpenAI Realtime Voice Lab
+# OpenAI Realtime Voice Demo
 
-Mobile-first web demo for OpenAI realtime voice models. It lets you try three live workflows from one responsive interface:
+A mobile-first Next.js demo for exploring OpenAI realtime voice models in the browser.
 
-- `gpt-realtime-2` for speech-to-speech assistant behavior and tool calls.
-- `gpt-realtime-translate` for live speech translation.
-- `gpt-realtime-whisper` for streaming transcription deltas.
+It includes three live workflows:
+
+- **Voice assistant** with `gpt-realtime-2`
+- **Live translation** with `gpt-realtime-translate`
+- **Streaming transcription** with `gpt-realtime-whisper`
 
 The app does not simulate model responses. It creates short-lived Realtime client secrets from server API routes and connects from the browser with WebRTC.
 
-## Security Model
+## Preview
 
-This project is designed for bring-your-own-key demos:
+![Desktop screenshot](public/screenshots/desktop.png)
 
-- Visitors can enter their own OpenAI API key in `Session settings`.
-- The browser stores that key only in the current tab with `sessionStorage`.
-- The key is sent to this app's server only when creating a short-lived Realtime client secret.
-- The browser uses only the short-lived client secret for the WebRTC session.
-- For local development, `.env.local` is still supported as an optional fallback.
+<p align="center">
+  <img src="public/screenshots/mobile.png" alt="Mobile screenshot" width="360" />
+</p>
 
-Do not deploy a public demo with your own production `OPENAI_API_KEY` unless you intend to pay for all visitor usage.
+## Why This Exists
 
-## Local Setup
+This project is a compact lab for testing what the realtime voice stack can do:
+
+- Speech-to-speech assistant sessions
+- Low-latency translated speech and subtitles
+- Streaming transcript deltas
+- Interruption-ready WebRTC sessions
+- Basic latency readouts for connection, first delta, first audio, and turn completion
+- Local mock tool calls for assistant demos
+
+## How Credentials Work
+
+This repo is designed for public, bring-your-own-key demos.
+
+- Visitors enter their own OpenAI API key in **Session settings**.
+- The browser stores the key only in the current tab with `sessionStorage`.
+- The key is sent to this app's server only to create a short-lived Realtime client secret.
+- The browser receives only that short-lived client secret for the WebRTC session.
+- For local development, `.env.local` is supported as an optional fallback.
+
+Do not deploy a public demo with your own production `OPENAI_API_KEY` unless you intend to pay for visitor usage.
+
+## Quick Start
 
 Install dependencies:
 
@@ -34,25 +55,19 @@ Run the development server:
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Open:
 
-You can either paste an OpenAI API key into the page or create `.env.local`:
+```text
+http://localhost:3000
+```
+
+Then paste your OpenAI API key into **Session settings** in the app.
+
+You can also create `.env.local` for local development:
 
 ```bash
 OPENAI_API_KEY=your_openai_api_key
 ```
-
-## Deployment
-
-Vercel is the simplest deployment target for this demo because it supports Next.js app routes without extra adapter work.
-
-For a public BYOK deployment:
-
-- Do not set `OPENAI_API_KEY` in production.
-- Let each visitor enter their own key in the app.
-- Make sure your deployment provider does not log request bodies containing user-provided keys.
-
-This app is not suitable for GitHub Pages because it needs server API routes under `/api/session/*`.
 
 ## Scripts
 
@@ -60,6 +75,29 @@ This app is not suitable for GitHub Pages because it needs server API routes und
 npm run dev
 npm run lint
 npm run build
+npm run start
+```
+
+## Deploy
+
+Vercel is the simplest deployment target because this app uses Next.js app routes under `/api/session/*`.
+
+For a public BYOK deployment:
+
+- Do not set `OPENAI_API_KEY` in production.
+- Let each visitor enter their own key in the app.
+- Avoid request-body logging on the session API routes.
+
+This app is not suitable for GitHub Pages because GitHub Pages cannot run the server API routes needed to create Realtime client secrets.
+
+## Project Structure
+
+```text
+app/                     Next.js app routes and UI
+app/api/session/*        Server routes that create Realtime client secrets
+hooks/useRealtimeRtc.ts  Browser WebRTC helper for translation/transcription
+lib/sessionConfig.ts     Model, language, voice, and instruction config
+public/screenshots/      README screenshots
 ```
 
 ## Notes

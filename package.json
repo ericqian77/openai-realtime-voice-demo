@@ -6,7 +6,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ericqian77/openai-realtime-voice-lab.git"
+    "url": "git+https://github.com/ericqian77/openai-realtime-voice-demo.git"
   },
   "scripts": {
     "dev": "next dev",

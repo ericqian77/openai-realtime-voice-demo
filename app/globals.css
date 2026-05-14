@@ -264,6 +264,10 @@ h3 {
   min-width: 0;
 }
 
+.sessionIntro > div:last-child {
+  min-width: 0;
+}
+
 .sessionIntro p:not(.modelName) {
   color: var(--muted);
   font-size: 14px;
@@ -632,6 +636,8 @@ input::placeholder {
   }
 
   .modeTabs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     min-height: 52px;
   }
 
@@ -687,7 +693,7 @@ input::placeholder {
   }
 
   .settingControls {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .settingsStrip {
